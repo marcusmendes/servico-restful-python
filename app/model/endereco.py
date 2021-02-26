@@ -2,7 +2,9 @@
 Classe que representa um endereço de uma pessoa e a tabela enderecos no banco de dados
 """
 from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 from app.database.base import Base
+from app.model.cidade import Cidade
 
 
 class Endereco(Base):
@@ -12,13 +14,20 @@ class Endereco(Base):
     logradouro = Column(String, nullable=False)
     numero = Column(Integer, nullable=False)
     complemento = Column(String, nullable=True)
+    cidade_id = Column(Integer, ForeignKey("cidade.id"))
+    cidade = relationship("Cidade", backref="enderecos")
+    estado_id = Column(Integer, ForeignKey("estado.id"))
+    estado = relationship("Estado", backref="enderecos")
+    pais_id = Column(Integer, ForeignKey("pais_id"))
+    pais = relationship("Pais", backref="enderecos")
 
     # Método construtor
-    def __init__(self, cep="", logradouro="", numero=0, complemento=""):
+    def __init__(self, cep="", logradouro="", numero=0, complemento="", cidade: Cidade = ""):
         self._cep = cep
         self._logradouro = logradouro
         self._numero = numero
         self._complemento = complemento
+        self._cidade = cidade
 
     @property
     def cep(self):
@@ -51,3 +60,11 @@ class Endereco(Base):
     @complemento.setter
     def complemento(self, complemento: str):
         self._complemento = complemento
+
+    @property
+    def cidade(self):
+        return self._cidade
+
+    @cidade.setter
+    def cidade(self, cidade: Cidade):
+        self._cidade = cidade

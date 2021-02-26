@@ -4,6 +4,7 @@ Classe responsável por definir uma pessoa no serviço RESTful e representar a t
 from sqlalchemy import Column, Integer, String, Date
 from sqlalchemy.orm import relationship
 from app.database.base import Base
+from app.model.endereco import Endereco
 
 
 class Pessoa(Base):

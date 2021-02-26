@@ -5,3 +5,5 @@ from sqlalchemy.orm import sessionmaker
 engine = create_engine('sqlite:///webservice.db', echo=True)
 Session = sessionmaker(bind=engine)
 Base = declarative_base()
+
+
