@@ -1,10 +1,19 @@
 """
-Classe responsável por definir uma pessoa no serviço RESTful
+Classe responsável por definir uma pessoa no serviço RESTful e representar a tabela pessoas no banco de dados
 """
-from app.model.endereco import Endereco
+from sqlalchemy import Column, Integer, String, Date
+from sqlalchemy.orm import relationship
+from app.database.base import Base
 
 
-class Pessoa:
+class Pessoa(Base):
+    __tablename__ = 'pessoas'
+    id = Column(Integer, primary_key=True)
+    nome = Column(String, nullable=False)
+    cpf = Column(String, nullable=False)
+    data_nascimento = Column(Date, nullable=False)
+    endereco = relationship("Endereco", uselist=False, backref="pessoa")
+
     # Método construtor
     def __init__(self, nome="", cpf="", data_nascimento="", endereco: Endereco = ""):
         self._nome = nome

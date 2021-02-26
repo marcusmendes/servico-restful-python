@@ -1,1 +1,1 @@
-__all__ = ['pessoa', 'endereco', 'cidade', 'estado', 'pais']
+__all__ = ['codigo_uf']
