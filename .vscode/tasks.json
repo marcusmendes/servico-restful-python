@@ -1,0 +1,47 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "compose-up-debug",
+            "type": "shell",
+            "command": "docker-compose -f docker/docker-compose.dev.yml -f docker/docker-compose.debug.yml up -d --build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "compose-down-debug",
+            "type": "shell",
+            "command": "docker-compose -f docker/docker-compose.dev.yml -f docker/docker-compose.debug.yml down",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "compose-up-dev",
+            "type": "shell",
+            "command": "docker-compose -f docker/docker-compose.dev.yml up -d --build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "compose-down-dev",
+            "type": "shell",
+            "command": "docker-compose -f docker/docker-compose.dev.yml down",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "problemMatcher": []
+        },
+    ]
+}
