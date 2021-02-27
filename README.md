@@ -1,4 +1,9 @@
 ## Excutar a Aplicação
+Instalar dependências
+```
+pip install -e .
+```
+
 Para Linux:
 ```
 $ export FLASK_APP=flaskr
