@@ -1,12 +1,7 @@
-from flask import Blueprint, request
+from flask import Blueprint
 from flaskr.service import pessoa_service
 
 pessoas_blueprint = Blueprint('pessoas', __name__, url_prefix='/pessoas')
-
-
-@pessoas_blueprint.route('/', methods=['POST'])
-def criar_pessoa():
-    return pessoa_service.criar_pessoa(request)
 
 
 @pessoas_blueprint.route('/cpf/<string:cpf>', methods=['GET'])

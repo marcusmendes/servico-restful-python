@@ -8,10 +8,13 @@ def create_app():
     init_db()
 
     from flaskr.controller.pessoa_controller import pessoas_blueprint
+    from flaskr.controller.home_controller import home_blueprint
     app.register_blueprint(pessoas_blueprint)
+    app.register_blueprint(home_blueprint)
 
-    from flaskr.handle_errors import handle_noresultfound_exception
-    app.register_error_handler(NoResultFound, handle_noresultfound_exception)
+    from flaskr import handle_errors
+    app.register_error_handler(NoResultFound, handle_errors.handle_noresultfound_exception)
+    app.register_error_handler(404, handle_errors.handle_404)
 
     @app.teardown_appcontext
     def shutdown_session(exception=None):
