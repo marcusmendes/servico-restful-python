@@ -9,5 +9,9 @@ Base.query = db_session.query_property()
 
 
 def init_db():
-    import flaskr.models
+    import flaskr.model.pais
+    import flaskr.model.estado
+    import flaskr.model.cidade
+    import flaskr.model.endereco
+    import flaskr.model.pessoa
     Base.metadata.create_all(bind=engine)
