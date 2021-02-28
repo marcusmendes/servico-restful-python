@@ -14,13 +14,13 @@ root_path = '/pessoas'
 endereco_field = 'endereco_id'
 invalid_date_msg = 'Invalid date format. Expected: YYYYY-MM-DD'
 
-
 def validate(date_str):
+
     try:
         date_time_obj = datetime.strptime(date_str, '%Y-%m-%d')
         return {'valid': True, 'date': date_time_obj}
     except:
-        return {'vaid': False}
+        return {'valid': False}
 
 
 @pessoas_blueprint.route(root_path, methods=['GET', 'POST'])
@@ -45,7 +45,7 @@ def create(create):
     if endereco is None:
         return {'message': 'endereco_id not found'}, 404 
 
-    date_check = validate(data_nascimento)
+    date_check = validate_date(data_nascimento)
     if not date_check['valid']:
         return {'message': invalid_date_msg}, 400
     
@@ -83,7 +83,7 @@ def update_local(id, request):
             return {'message': 'endereco_id not found'}, 404
 
     if 'data_nascimento' in data:
-        date_check = validate (data['data_nascimento'])
+        date_check = validate_date (data['data_nascimento'])
         if not date_check['valid']:
             return {'message': invalid_date_msg}, 400
         
