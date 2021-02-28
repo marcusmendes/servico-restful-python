@@ -1,5 +1,6 @@
 from flask import Blueprint, request
-from flaskr.models import Pessoa, Endereco
+from flaskr.model.pessoa import Pessoa
+from flaskr.model.endereco import Endereco
 from flaskr.database import db_session
 from datetime import datetime
 from sqlalchemy import exc
@@ -13,6 +14,7 @@ root_path = '/pessoas'
 endereco_field = 'endereco_id'
 invalid_date_msg = 'Invalid date format. Expected: YYYYY-MM-DD'
 
+
 def validate(date_str):
     try:
         date_time_obj = datetime.strptime(date_str, '%Y-%m-%d')
@@ -20,12 +22,14 @@ def validate(date_str):
     except:
         return {'vaid': False}
 
+
 @pessoas_blueprint.route(root_path, methods=['GET', 'POST'])
 def process_root ():
     if request.method == 'GET':
         return index(Pessoa)
     else:
         return create(request)
+
 
 def create(create):
     data = request.get_json(force=True)
@@ -60,6 +64,7 @@ def create(create):
     
     return {}, 200
 
+
 @pessoas_blueprint.route(root_path + '/<id>', methods=['GET', 'PUT', 'DELETE'])
 def process_id(id):
     if request.method == 'GET':
@@ -68,6 +73,7 @@ def process_id(id):
         return update_local(id, request)
     elif request.method == 'DELETE':
         return delete(Pessoa, id)
+
 
 def update_local(id, request):
     data = request.get_json(force=True);
