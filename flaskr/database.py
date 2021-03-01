@@ -1,17 +1,22 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+from flask_sqlalchemy import SQLAlchemy
+from flask_seeder import FlaskSeeder
 
-engine = create_engine('sqlite:///webservice.db', echo=True)
-db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
-Base = declarative_base()
-Base.query = db_session.query_property()
+db = SQLAlchemy()
+Base = db.Model
 
 
-def init_db():
+def init_db(app):
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///webservice.db'
+    app.config['SQLALCHEMY_ECHO'] = True
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.init_app(app)
+    seeder = FlaskSeeder()
+    seeder.init_app(app, db)
+
     import flaskr.model.pais
     import flaskr.model.estado
     import flaskr.model.cidade
     import flaskr.model.endereco
     import flaskr.model.pessoa
-    Base.metadata.create_all(bind=engine)
+
+    db.create_all(app=app)

@@ -7,6 +7,7 @@ setup(
     install_requires=[
         'flask',
         'SQLAlchemy',
-        'Flask-SQLAlchemy'
+        'Flask-SQLAlchemy',
+        'Flask-Seeder'
     ]
 )
