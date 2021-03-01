@@ -7,7 +7,7 @@ from flaskr.model.endereco import Endereco
 
 class Pessoa(Base):
     __tablename__ = 'pessoas'
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     nome = Column(String, nullable=False)
     cpf = Column(String, nullable=False)
     data_nascimento = Column(Date, nullable=False)

@@ -9,7 +9,7 @@ from flaskr.model.pais import Pais
 
 class Endereco(Base):
     __tablename__ = 'enderecos'
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     logradouro = Column(String, nullable=False)
     cep = Column(String, nullable=False)
     numero = Column(Integer, nullable=False)
